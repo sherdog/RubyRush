@@ -31,10 +31,20 @@ package {
 		private var match:Boolean = true;
 		private var stagePadding:int = 20;
 		
-		
-		
-		
 		public function RubyRush():void {
+			var _stage:MainContainer = new MainContainer();
+			var _level:Level = new Level();
+			
+			_level.setLevel('hi!');
+			_level.x = _stage.width - _level.width;
+			_level.y = 50;
+			addChild(_level);
+		
+			_stage.x = 0;
+			_stage.y = 0;
+			addChild(_stage);
+			trace(_stage.x);
+			trace('Loading Ruby Rush');
 			// Game initiation
 			// Create and style score text
 			addChild(score_txt);
@@ -51,6 +61,7 @@ package {
 			addChild(hint_txt);
 			hint_txt.textColor=0x000000;
 			hint_txt.x=550;
+			
 			// Create Gems in rows and columns
 			for (var i:uint=0; i<8; i++) {
 				gems_array[i]=new Array();
