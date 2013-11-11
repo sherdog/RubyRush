@@ -6,6 +6,7 @@ package {
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
+	import com.interactivearmy.Gem;
 	
 	
 	
@@ -15,6 +16,7 @@ package {
 		private var selectorBox:Sprite=new Sprite();
 		private var selectorRow:int=-10;
 		private var selectorColumn:int=-10;
+		
 		private var red:uint = 0xFF0000;
 		private var green:uint = 0xFF00;
 		private var blue:uint = 0xFF;
@@ -22,7 +24,7 @@ package {
 		private var cyan:uint = 0xFFFF;
 		private var magenta:uint = 0xFF00FF;
 		private var white:uint = 0x000000;
-		private var colours_array:Array=new Array(red,green,blue,yellow,cyan,magenta,white);
+		
 		private var clickPossible:Boolean=false;
 		private var score_txt:TextField=new TextField();
 		private var hint_txt:TextField=new TextField();
@@ -30,6 +32,8 @@ package {
 		private var inaRow:uint=0;
 		private var match:Boolean = true;
 		private var stagePadding:int = 20;
+		private var _gem = new Gem();
+		
 		
 		public function RubyRush():void {
 			var _stage:MainContainer = new MainContainer();
@@ -70,13 +74,11 @@ package {
 						gems_array[i][j]=Math.floor(Math.random()*7);
 					}
 					while (rowLineLength(i,j)>2 || columnLineLength(i,j)>2);
-					aGem=new Sprite();
-					aGem.graphics.beginFill(colours_array[gems_array[i][j]]);
-					aGem.graphics.drawCircle(30,30,29);
-					aGem.graphics.endFill();
+					aGem = new Gem();
 					aGem.name=i+"_"+j;
 					aGem.x=j*60;
 					aGem.y=i*60;
+					trace('added gem name: ' + aGem.name);
 					addChild(aGem);
 				}
 			}
@@ -129,10 +131,7 @@ package {
 							// pick a random color for the gem
 							gems_array[0][j]=Math.floor(Math.random()*7);
 							// create the gem
-							aGem=new Sprite();
-							aGem.graphics.beginFill(colours_array[gems_array[0][j]]);
-							aGem.graphics.drawCircle(30,30,29);
-							aGem.graphics.endFill();
+							aGem=new Gem();
 							// ID it
 							aGem.name="0_"+j;
 							// position it
